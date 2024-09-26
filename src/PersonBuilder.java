@@ -1,19 +1,47 @@
 public class PersonBuilder {
+    protected String name;
+    protected String surname;
+    protected Integer age;
+    protected String address;
+
+    public PersonBuilder() {
+        super();
+    }
 
     public PersonBuilder setName(String name) {
-        return null;
+        this.name = name;
+        return this;
     }
+
     public PersonBuilder setSurname(String surname) {
-        return null;
+        this.surname = surname;
+        return this;
     }
+
     public PersonBuilder setAge(int age) {
-        return null;
+        if (age < 0) {
+            throw new IllegalArgumentException("Введите корректный возраст.");
+        }
+        this.age = age;
+        return this;
     }
+
     public PersonBuilder setAddress(String address) {
-        return null;
+        this.address = address;
+        return this;
     }
 
     public Person build() {
-        return null;
+        Person person = null;
+        if (validatePerson()) {
+            person = new Person(this);
+        } else {
+            throw new IllegalStateException("Необходимо указать имя и фамилию.");
+        }
+        return person;
+    }
+
+    private boolean validatePerson() {
+        return (name != null && !name.trim().isEmpty() && surname != null && !surname.trim().isEmpty());
     }
 }

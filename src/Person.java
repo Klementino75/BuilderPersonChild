@@ -1,53 +1,67 @@
+import java.util.Objects;
 import java.util.OptionalInt;
 
 public class Person {
     protected final String name;
     protected final String surname;
+    protected Integer age;
+    protected String address;
 
-    public Person(String name, String surname, String name1, String surname1) {
-        this.name = name1;
-        this.surname = surname1;
-    }
-
-    public Person(String name, String surname, int age, String name1, String surname1) {
-        this.name = name1;
-        this.surname = surname1;
+    public Person(PersonBuilder personBuilder) {
+        this.name = personBuilder.name;
+        this.surname = personBuilder.surname;
+        this.age = personBuilder.age;
+        this.address = personBuilder.address;
     }
 
     public boolean hasAge() {
-        return false;
+        return age >= 0;
     }
+
     public boolean hasAddress() {
-        return false;
+        return address != null;
     }
 
     public String getName() {
-        return "";
-    }
-    public String getSurname() {
-        return "";
-    }
-    public OptionalInt getAge() {
-        return OptionalInt.empty();
-    }
-    public String getAddress() {
-        return "";
+        return name;
     }
 
-    public void setAddress(String address) {  }
-    public void happyBirthday() {  }
+    public String getSurname() {
+        return surname;
+    }
+
+    public OptionalInt getAge() {
+        return OptionalInt.of(age);
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+    }
+
+    public void happyBirthday() {
+        if (hasAge()) age += 1;
+    }
 
     public PersonBuilder newChildBuilder() {
-        return null;
+        PersonBuilder personBuilder = new PersonBuilder();
+        personBuilder.setSurname(getSurname());
+        personBuilder.setAddress(getAddress());
+        return personBuilder;
     }
 
     @Override
     public String toString() {
-        return "";
+        return "[ name = " + name +
+                ", surname = " + surname +
+                ", age = " + age +
+                ", address = " + address + " ]";
     }
 
     @Override
     public int hashCode() {
-        return 0;
+        return Objects.hash(name, surname);
     }
 }
