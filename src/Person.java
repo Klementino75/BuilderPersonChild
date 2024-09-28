@@ -31,14 +31,14 @@ public class Person {
     }
 
     public OptionalInt getAge() {
+        if (age == null) {
+            return OptionalInt.empty();
+        }
         return OptionalInt.of(age);
     }
 
     public String getAddress() {
         return address;
-    }
-
-    public void setAddress(String address) {
     }
 
     public void happyBirthday() {

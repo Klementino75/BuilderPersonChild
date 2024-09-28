@@ -9,17 +9,17 @@ public class Main {
                 .build();
         System.out.println(mom);
 
-        System.out.println("age - " + mom.hasAge());
-        System.out.println("address - " + mom.hasAddress());
+//        System.out.println("age - " + mom.hasAge());
+//        System.out.println("address - " + mom.hasAddress());
 
         Person son = mom.newChildBuilder()
                 .setName("Антошка")
-                .setAge(10)
+                //.setAge(10)
                 .build();
         System.out.println("У " + mom + " есть сын, " + son + "\n");
 
         mom.happyBirthday();
-        mom.getAge().ifPresent(i -> System.out.println("Вы стали старше, с Днём рождения! Вам " + i + "."));
+        mom.getAge().ifPresent(i -> System.out.println("Вы стали старше, с Днём рождения! Вам " + i + ".\n"));
 
         try {
             // Не хватает обязательных полей
